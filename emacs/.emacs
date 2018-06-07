@@ -1,7 +1,3 @@
-;; ----------------------------------IMPORTANT--------------------------------
-;; This file was originally a Bewmacs file, please check the link on README file.
-;; ----------------------------------IMPORTANT--------------------------------
-
 (package-initialize)
 
 (require 'package)
@@ -10,7 +6,7 @@
 ;; Packages to installed / Packages already installed
 (require 'cl)
 (defvar prelude-packages
-  '(ag  flx-ido flx fiplr multiple-cursors erlang elixir-mode markdown-mode anaconda-mode ac-anaconda highlight-numbers atom-one-dark-theme
+  '(ag  flx-ido flx fiplr multiple-cursors erlang elixir-mode markdown-mode highlight-numbers
 	emmet-mode haskell-mode)
   "A list of packages to ensure are installed at launch.")
 
@@ -35,8 +31,8 @@
 (set-keyboard-coding-system nil)
 
 ;; Setting default font to Meslo LG S Bold with 10.5
-(set-face-attribute 'default nil :font "Meslo LG S-10.5")
-(set-frame-font "Meslo LG S Bold-10.5:antialias=natural" nil t)
+(set-face-attribute 'default nil :font "Monaco-11")
+(set-frame-font "Monaco-11" nil t)
 
 ;; Add custom themes folder (~/.emacs.d/themes)
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
@@ -139,7 +135,7 @@
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 ;; Erlang-mode
-(require 'erlang-start)
+;; (require 'erlang-start)
 ;;(add-to-list 'ac-modes 'erlang-mode)
 
 ;; Custom Set Variables
@@ -262,8 +258,3 @@
 
 ;; Replace All Occurrences (NEED TO FIND A KEYSHORT CUT THAT IS NOT USED)
 ;;(global-set-key (kbd "C-s") 'replace-string)
-
-
-;; ----------------------------------IMPORTANT--------------------------------
-;; This file was originally a Bewmacs file, please check the link on README file.
-;; ----------------------------------IMPORTANT--------------------------------
