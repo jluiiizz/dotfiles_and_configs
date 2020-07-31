@@ -8,7 +8,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jiangmiao/auto-pairs'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-surround'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -18,7 +18,10 @@ Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sainnhe/gruvbox-material'
 Plug 'arcticicestudio/nord-vim'
+Plug 'mhartington/oceanic-next'
 Plug 'dracula/vim'
+Plug 'tjdevries/colorbuddy.vim'
+Plug 'tjdevries/gruvbuddy.nvim'
 
 " Elixir & Erlang
 Plug 'elixir-editors/vim-elixir'
@@ -29,6 +32,10 @@ Plug 'vim-erlang/vim-erlang-omnicomplete'
 Plug 'vim-erlang/vim-erlang-tags'
 Plug 'vim-erlang/vim-erlang-skeletons'
 
+" Javascript & Typescript
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+
 call plug#end()
 
 " Basics
@@ -38,7 +45,9 @@ let mapleader = "\<Space>"
 filetype plugin on
 set number relativenumber
 set noswapfile
+set noerrorbells
 
+set wrap!
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -63,15 +72,22 @@ endif
 set background=dark
 
 let g:gruvbox_material_background = 'soft'
-let g:airline_theme='gruvbox_material'
+"let g:airline_theme='gruvbox_material'
+let g:airline_theme='dark'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#branch#enabled = 1
 
-colorscheme gruvbox-material
+"colorscheme gruvbox-material
+" colorscheme ron
+colorscheme default
 
-" Bindings
+" Change Pemnu colors on default and ron colorschemes
+highlight Pmenu ctermbg=gray guibg=gray ctermfg=white guifg=white
+
+"Bindings
 
 nnoremap <Leader>1 :NERDTreeToggle<CR>
+nnoremap <Leader>2 :NERDTreeRefreshRoot<CR>
 
 nnoremap <Leader>rvc :vsplit ~/.config/nvim/init.vim<CR>
 nnoremap <Leader><CR> :source ~/.config/nvim/init.vim<CR>
@@ -80,6 +96,8 @@ inoremap <C-s> <Esc>:w<CR>
 nnoremap <C-s> :w<CR>
 
 inoremap <A-BS> <C-W>
+cnoremap <A-BS> <C-w>
+inoremap jj <Esc>
 
 inoremap <C-o> <Esc>o
 inoremap <C-O> <Esc>O
@@ -95,10 +113,11 @@ nnoremap <Leader>l :Buffers<CR>
 nnoremap <Leader>n :bn<CR>
 nnoremap <Leader>p :bp<CR>
 nnoremap <Leader>q :bd<CR>
-nnoremap <Leader>fq :!bd<CR>
+nnoremap <Leader>fq :bd!<CR>
 nnoremap <Leader>w :q<CR>
-nnoremap <Leader>fw :!q<CR>
+nnoremap <Leader>fw :q!<CR>
 nnoremap <Leader>sw :wq<CR>
+nnoremap <Leader>s :w<CR>
 nnoremap <Leader>oo o<Esc>k
 nnoremap <Leader>OO O<Esc>j
 
@@ -133,3 +152,20 @@ let g:fzf_colors =
             \ 'marker':  ['fg', 'Keyword'],
             \ 'spinner': ['fg', 'Label'],
             \ 'header':  ['fg', 'Comment'] }
+
+" typescript-vim
+let g:typescript_indent_disable = 1
+
+" coc.nvim
+
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+  "inoremap <silent><expr> <TAB>
+              "\ pumvisible() ? "\<C-n>" :
+              "\ <SID>check_back_space() ? "\<TAB>" :
+              "\ coc#refresh()
+  "inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
