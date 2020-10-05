@@ -6,13 +6,14 @@ Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
-Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-surround'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-gitgutter'
 
 " Themes & Style
 Plug 'vim-airline/vim-airline-themes'
@@ -22,6 +23,8 @@ Plug 'mhartington/oceanic-next'
 Plug 'dracula/vim'
 Plug 'tjdevries/colorbuddy.vim'
 Plug 'tjdevries/gruvbuddy.nvim'
+Plug 'crusoexia/vim-monokai'
+Plug 'juanpabloaj/vim-pixelmuerto'
 
 " Elixir & Erlang
 Plug 'elixir-editors/vim-elixir'
@@ -47,11 +50,12 @@ set number relativenumber
 set noswapfile
 set noerrorbells
 
-set wrap!
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
+
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 
 fun! <SID>StripTW()
     let l = line(".")
@@ -65,24 +69,36 @@ set backspace=indent,eol,start
 
 " Style
 
-if has('termguicolors')
-  set termguicolors
+"if has('termguicolors')
+  "set termguicolors
+"endif
+
+if &t_Co == 256
+    colorscheme pixelmuerto
+else
+    colorscheme monokai
 endif
 
 set background=dark
+set t_Co=256
 
 let g:gruvbox_material_background = 'soft'
 "let g:airline_theme='gruvbox_material'
-let g:airline_theme='dark'
+"let g:airline_theme='base16_grayscale'
+let g:airline_theme='jellybeans'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#branch#enabled = 1
 
-"colorscheme gruvbox-material
+" colorscheme gruvbox-material
 " colorscheme ron
-colorscheme default
+" colorscheme default
+"colorscheme jellybeans
+"colorscheme naysayer88
+ "colorscheme 256_noir
+"colorscheme nord
 
 " Change Pemnu colors on default and ron colorschemes
-highlight Pmenu ctermbg=gray guibg=gray ctermfg=white guifg=white
+highlight Pmenu ctermbg=black guibg=gray ctermfg=white guifg=white
 
 "Bindings
 
@@ -102,7 +118,7 @@ inoremap jj <Esc>
 inoremap <C-o> <Esc>o
 inoremap <C-O> <Esc>O
 
-nnoremap <Leader>t :below new +term<CR> :resize 10<CR>i
+nnoremap <Leader>t :below new +term<CR> :resize 15<CR>i
 tnoremap <ESC> <C-\><C-N>
 tnoremap jk <C-\><C-N>
 tnoremap <Space><Space> <C-\><C-N>
@@ -127,6 +143,9 @@ nnoremap <Leader>zb :BLines<CR>
 nnoremap <Leader>zs :Lines<CR>
 
 nnoremap <Leader><Space> :nohlsearch<CR>
+
+nnoremap <C-2> :vsplit 2<CR>
+nnoremap <C-3> :split 3<CR>
 
 " Autos
 
@@ -169,3 +188,7 @@ else
   inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
 
+" AutoPairs
+let g:AutoPairsCenterLine = 0
+
+set nowrap

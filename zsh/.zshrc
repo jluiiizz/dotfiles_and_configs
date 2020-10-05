@@ -153,3 +153,35 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 # opam configuration
 test -r /home/john/.opam/opam-init/init.zsh && . /home/john/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/john/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/john/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/john/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/john/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# Aliases
+
+alias v="nvim"
+alias sysfb="journalctl --since=today"
+fbd() {
+    npm run tsoa routes && npm run webpack && firebase deploy --only functions:$1
+}
+
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
+export ANDROID_HOME=~/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+export FZF_DEFAULT_COMMAND='ag --nocolor --ignore node_modules -g ""'
