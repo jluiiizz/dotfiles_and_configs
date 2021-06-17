@@ -8,7 +8,9 @@ export ZSH="/home/john/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="spaceship"
+# ZSH_THEME="spaceship"
+# ZSH_THEME="evan"
+ZSH_THEME="agnoster"
 SPACESHIP_PROMPT_ORDER=(
   user          # Username section
   dir           # Current directory section
@@ -127,6 +129,7 @@ if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
 fi
 
 source "$HOME/.zinit/bin/zinit.zsh"
+
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
@@ -173,6 +176,29 @@ unset __conda_setup
 
 alias v="nvim"
 alias sysfb="journalctl --since=today"
+alias emacs='emacs -nw'
+
+intellij() {
+    ~/intellij/bin/idea.sh $1
+}
+
+
+intelliju() {
+    ~/jetbrains/intelliju/bin/idea.sh $1
+}
+
+webstorm() {
+    ~/webstorm/bin/webstorm.sh $1
+}
+
+datagrip() {
+    ~/jetbrains/datagrip/bin/datagrip.sh
+}
+
+clion() {
+    ~/jetbrains/clion/bin/clion.sh $1
+}
+
 fbd() {
     npm run tsoa routes && npm run webpack && firebase deploy --only functions:$1
 }
@@ -185,3 +211,5 @@ export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 export FZF_DEFAULT_COMMAND='ag --nocolor --ignore node_modules -g ""'
+
+prompt_context() {}
